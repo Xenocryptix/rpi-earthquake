@@ -2,9 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Grid Layout Example</title>
 </head>
 <body>
+<section id="loginCredentials">
+    <div class="loginContainer">
+        <title class="earthquakeDetector">EARTHQUAKE DETECTOR</title>
+        <h1 class="loginToContinue">Log in to continue</h1>
+        <div class="usernameBox">
+            <label>
+                <input type="text" placeholder="Username" class="usernameInput" id="username">
+            </label>
+        </div>
+        <div class="passwordBox">
+            <label>
+                <input type="text" placeholder="Password" class="passwordInput" id="password">
+            </label>
+        </div>
+        <div class="loginButton">Log in</div>
+        <h3 class="or">Or</h3>
+        <div class="registerButton">Register</div>
+    </div>
 
+</section>
+
+<section id="registerCredentials">
+    <div class="registerContainer">
+        <a class="arrow" href="C:\Users\User\IdeaProjects\cs23-15-main\frontend\src\arrow.png"></a>
+        <title class="earthquakeDetector">EARTHQUAKE DETECTOR</title>
+        <h1 class="createANewAccount">Create a new account</h1>
+        <div class="boxes">
+
+            <div class="deviceID" input type="text" placeholder="Device ID" class="deviceIdInput" id="device"></div>
+            <div class="registerUsername" input type="text" placeholder="Username" class="registerUsernameInput" id="registerUsername"></div>
+            <div class="registerPassword" input type="text" placeholder="Password" class="registerPasswordInput" id="registerPassword"></div>
+            <div class="confirmPassword" input type="text" placeholder="Confirm Password" class="confirmPasswordInput" id="confirmPassword"></div>
+
+        </div>
+        <div class="registerBox">Register</div>
+    </div>
+</section>
 </body>
 </html>
