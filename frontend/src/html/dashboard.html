@@ -22,23 +22,28 @@
 
         <div class="container" id="left-div">
             <h2>Device</h2>
-
-            <h4 style="margin-top: 20%;">Alarm Status</h4>
-            <h3 id="alarm-status">Active</h3>
-            <h4>Uptime</h4>
-            <h3 id="uptime">0d 1h 42min</h3>
-            <h4>Detection Mode</h4>
-            <h3 id="mode">Standard</h3>
-
-            <img src="../icons/sign-out.svg" alt="sign-out" id="sign-out-icon">
+            <div>
+                <h4 style="margin-top: 20%;">Alarm Status</h4>
+                <h3 id="alarm-status">Active</h3>
+                <h4>Uptime</h4>
+                <h3 id="uptime">0d 1h 42min</h3>
+                <h4>Detection Mode</h4>
+                <h3 id="mode">Standard</h3>
+            </div>
+            <div id="device-bottom-icons">
+                <img src="../icons/sign-out.svg" alt="sign-out" id="sign-out-icon">
+                <!-- todo: add icon to edit profile (reset password) -->
+            </div>
         </div>
 
         <div id="center-div">
             <div class="container" id="graph-div">
                 <div id="readings-header">
                     <h2>Readings</h2>
-                    <h3>1h</h2>
-                    <h3 style="margin-left: 5%;">Magnitude</h2>
+                    <h3>1h</h3>
+                    <img src="../icons/arrow.svg" alt="arrow" id="select-interval">
+                    <h3 style="margin-left: 5%;">Magnitude</h3>
+                    <img src="../icons/arrow.svg" alt="arrow" id="select-graph">
                 </div>
                 <div id="graph"></div>
             </div>
@@ -49,8 +54,17 @@
         </div>
 
         <div class="container" id="right-div">
-            <h2>Log</h2>
-            <div class="entry"></div>
+            <div id="log-header">
+                <h2>Log</h2>
+            </div>
+            <div id="log-entries">
+                <div class="entry">
+                    <h2>x minutes ago</h2>
+                    <h3>3.2 AVG</h3>
+                    <h3>4.5 MAX</h3>
+                    <h4>2023-09-29 14:25:40 | 52° 13’ 24.19’’, 6° 53’ 7.52’’</h4>
+                </div>
+            </div>
         </div>
     </div>
 </body>
