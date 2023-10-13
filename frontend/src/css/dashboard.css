@@ -10,16 +10,16 @@ body {
 .grid-container {
     display: grid;
     gap: 3%;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 2fr 3fr 2fr;
     grid-template-rows: 5% 80%;
     padding: 3%;
     height: 100%;
 }
 
 .container {
-    padding: 20px;
+    padding: 2rem;
     background-color: white;
-    border-radius: 1%;
+    border-radius: 0.8rem;
 }
 
 #title-div {
@@ -51,7 +51,7 @@ h2 {
 h3 {
     color: #151515;
     font-family: Inter;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
 
     margin-top: 0;
@@ -60,7 +60,7 @@ h3 {
 h4 {
     color: #474747;
     font-family: Inter;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 200;
     margin-bottom: 0;
 }
@@ -91,7 +91,7 @@ h4 {
 #center-div {
     display: grid;
     gap: 3%;
-    grid-template-rows: 3fr 2fr;
+    grid-template-rows: 1fr 1fr;
 }
 
 #readings-header {
@@ -109,7 +109,7 @@ h4 {
     transform: rotate(90deg);
     height: 1rem;
     margin-left: 1%;
-    padding: 1%;
+    padding: 0.3rem;
     border-radius: 20%;
 }
 
@@ -119,13 +119,14 @@ h4 {
 }
 
 #graph {
-    background-color: lightblue;
-    margin: 4%;
-    height: 70%;
+    margin: 2rem;
+    margin-top: 4rem;
+    height: 80%;
     border-radius: 1rem;
 }
 
 #map {
+    display: none;
     height: 70%;
     background-color: green;
     border-radius: 1rem;
@@ -133,17 +134,41 @@ h4 {
     margin-top: 6%;
 }
 
+#log-header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+#log-header h3{
+    margin-right: 0;
+    margin-left: auto;
+}
+
+#log-header img {
+    transform: rotate(90deg);
+    height: 1rem;
+    margin-left: 1%;
+    padding: 0.3rem;
+    border-radius: 20%;
+}
+
+#log-header img:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
 #log-entries {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     display: flex;
     flex-direction: column;
     overflow: auto;
-    max-height: fit-content;
+    max-height: 85%;
 }
 
 .entry {
     padding: 4%;
-    border-radius: 0.3125rem;
+    border-radius: 0.4rem;
     border: 2px solid #d0d0d0;
     margin-bottom: 1rem;
 }
@@ -153,7 +178,7 @@ h4 {
 }
 
 .entry h4 {
-    font-size: 0.7rem;
+    font-size: 0.5rem;
     margin-top: 0;
     text-wrap:nowrap;
 }
