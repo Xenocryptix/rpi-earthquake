@@ -1,0 +1,208 @@
+html, body {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background-color: white;
+}
+
+
+.loginContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 25.1vw;
+    height: auto;
+    background-color: #F4F4F4;
+    border-radius: 1vw;
+    padding: 2%;
+}
+
+
+#earthquakeDetector {
+    margin-top: 8%;
+    margin-left: 0%;
+    font-weight: 400;
+
+    color: #474747;
+    font-family: Inter, sans-serif;
+    font-size: 1.6vw;
+    display: block;
+    text-align: center;
+}
+
+.loginToContinue {
+    margin-top: 3vw;
+    margin-left: -11vw;
+    font-weight: 600;
+    text-align: center;
+
+    color: #474747;
+    font-family: Inter, sans-serif;
+    font-size: 1.3vw;
+
+    display: block;
+    text-align: center;
+}
+
+.usernameInput, .passwordInput {
+    width: 20vw;
+    height: 5vh;
+    border-radius: 0.5vw;
+    margin-left: 8%;
+    margin-top: 5%;
+    font-family: Inter, sans-serif;
+    font-size: 1vw;
+    color: black;
+    font-weight: 400;
+    text-indent: 1%;
+
+}
+
+input {
+    font-family: Inter, sans-serif;
+}
+
+.passwordInput::placeholder, .usernameInput::placeholder {
+    text-indent: 1%;
+}
+
+.loginButton {
+    width: 20.4vw;
+    height: 5.7vh;
+    border-radius: 0.5vw;
+    margin-left: 8%;
+    margin-top: 5%;
+    font-family: Inter, sans-serif;
+    font-size: 1.2vw;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    background-color: #0073DE;
+    z-index: 5;
+    line-height: 5.5vh;
+}
+
+.or {
+    font-family: Inter, sans-serif;
+    color: #474747;
+    font-size: 0.8vw;
+    font-weight: 400;
+    margin-left: 47%;
+    margin-top: 5%;
+}
+
+
+.lines {
+    height: 0.1vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 24vw; /* Adjust the total width of the .lines container */
+}
+
+
+.line1, .line2 {
+    height: 100%; /* Make the lines the same height as the container */
+    background-color: #000;
+    margin-top: -11%;
+}
+
+.line1 {
+    width: 35%;
+    margin-left: 10%;
+}
+
+.line2 {
+    width: 35%;
+    margin-right: 8%;
+}
+
+
+.registerButton {
+    width: 20.4vw;
+    height: 5.7vh;
+    border-radius: 0.5vw;
+    margin-left: 8%;
+    margin-top: 3%;
+    margin-bottom: 15%;
+    font-family: Inter, sans-serif;
+    font-size: 1.2vw;
+    font-weight: 600;
+    text-align: center;
+    color: #0073DE;
+    background-color: white;
+    z-index: 5;
+    line-height: 5.5vh;
+    border-color: #0073DE;
+}
+
+
+/*Register Part*/
+
+
+.arrow {
+    transform: rotate(180deg) scale(0.2);
+    width: 0.1vw;
+    height: 0.1vw;
+    margin-left: 5%;
+    margin-top: 10%;
+}
+
+.earthquakeDetector {
+    margin-top: -6.5%;
+    margin-left: 0%;
+    font-weight: 400;
+
+    color: #474747;
+    font-family: Inter, sans-serif;
+    font-size: 1.6vw;
+    display: block;
+    text-align: center;
+}
+
+.createANewAccount {
+    margin-top: 15%;
+    font-size: 1.4vw;
+}
+
+.boxes {
+    margin-top: 0vw;
+}
+
+.deviceIdInput, .registerUsernameInput, .registerPasswordInput, .confirmPasswordInput {
+    width: 20vw;
+    height: 5vh;
+    border-radius: 0.5vw;
+    margin-left: 8%;
+    margin-top: 5%;
+    font-family: Inter, sans-serif;
+    font-size: 1vw;
+    color: black;
+    font-weight: 400;
+    text-indent: 1%;
+
+}
+
+.deviceIdInput::placeholder, .registerUsernameInput::placeholder, .registerPasswordInput::placeholder, .confirmPasswordInput::placeholder {
+    text-indent: 1%;
+}
+
+.registerBox {
+    width: 20.4vw;
+    height: 5.7vh;
+    border-radius: 0.5vw;
+    margin-left: 8%;
+    margin-top: 5%;
+    margin-bottom: 15%;
+    font-family: Inter, sans-serif;
+    font-size: 1.2vw;
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    background-color: #0073DE;
+    z-index: 5;
+    line-height: 5.5vh;
+}
+
+
