@@ -11,7 +11,7 @@ body {
     display: grid;
     gap: 3%;
     grid-template-columns: 2fr 3fr 2fr;
-    grid-template-rows: 5% 80%;
+    grid-template-rows: 3% 80%;
     padding: 3%;
     height: 100%;
 }
@@ -35,8 +35,8 @@ body {
     font-family: Inter;
     font-size: 1.4rem;
     font-weight: 200;
-
-    margin-bottom: 3%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 h2 {
@@ -93,35 +93,78 @@ h4 {
     gap: 3%;
     grid-template-rows: 1fr 1fr;
 }
-
-#readings-header {
+.header {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    justify-content: space-between;
 }
 
-#readings-header h3 {
-    margin-right: 0;
-    margin-left: auto;
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    z-index: 999;
 }
 
-#readings-header img {
+.navbar .arrow-img {
     transform: rotate(90deg);
-    height: 1rem;
-    margin-left: 1%;
-    padding: 0.3rem;
-    border-radius: 20%;
 }
 
-#readings-header img:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline-block;
+    margin-left: 1rem;
+
+}
+
+/* Style the dropdown menu */
+.navbar ul ul {
+    position: absolute;
+    top: 100%;
+    margin-top: -0.6rem;
+    margin-right: 3rem;
+    display: none;
+}
+
+.navbar ul ul li {
+    display: block;
+}
+
+.navbar li:hover ul {
+    display: block;
+}
+
+.navbar ul ul li h3 {
+    background-color: #f2f2f2;
+    width: 90%;
+    margin: 0;
+    padding: 1rem;
+}
+
+.arrow-img {
+    scale: 70%;
+    position: relative;
+    top: 0.3rem;
+    margin: 0;
+    margin-left: 0.1rem;
+}
+
+/* Change the background color of dropdown links on hover */
+.navbar ul ul li h3:hover {
     cursor: pointer;
+    background-color: #c4c4c4;
 }
 
 #graph {
     margin: 2rem;
     margin-top: 4rem;
-    height: 80%;
+    width: 100%;
     border-radius: 1rem;
 }
 
@@ -174,6 +217,7 @@ h4 {
 }
 
 .entry h3:first-of-type {
+    margin-top: -0.5rem;
     margin-bottom: 0;
 }
 

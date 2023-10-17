@@ -12,6 +12,7 @@ Chart.defaults.plugins.legend.display = false;
       }]
     },
     options: {
+      responsive: true,
       scales: {
         y: {
           beginAtZero: true

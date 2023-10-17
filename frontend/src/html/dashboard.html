@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <!-- ensure that the page is properly displayed on different devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="../css/dashboard.css">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +18,7 @@
 <body>
     <div class="grid-container">
         <div id="title-div">
-            <p id="title">EARTHQUAKE DETECTOR</p>
+            <p id="title">EARTHQUAKE <span style="color: rgb(0, 68, 255);">DETECTOR</span></p>
         </div><div></div><div></div>
 
         <div class="container" id="left-div">
@@ -38,13 +39,33 @@
 
         <div id="center-div">
             <div class="container" id="graph-div">
-                <div id="readings-header">
+                <div class="header">
                     <h2>Readings</h2>
-                    <h3>1h</h3>
-                    <img src="../icons/arrow.svg" alt="arrow" id="select-interval">
-                    <h3 style="margin-left: 5%;">Magnitude</h3>
-                    <img src="../icons/arrow.svg" alt="arrow" id="select-graph">
-                </div>
+                    <nav class="navbar">
+                        <ul>
+                            <li>
+                                <h3 id="selected-time-interval">30 sec<img src="../icons/arrow.svg" alt="arrow" class="arrow-img"></h3>
+                                <ul id="interval-list" style="right: 40%">
+                                    <li><h3>5 sec</h3></li>
+                                    <li><h3">30 sec</h3></li>
+                                    <li><h3>1 min</h3></li>
+                                    <li><h3>5 min</h3></li>
+                                </ul>
+                            </li>
+    
+                            <li>
+                                <h3 id="selected-graph-data">Magnitude<img src="../icons/arrow.svg" alt="arrow" class="arrow-img"></h3>
+                                <!-- this weird adjustment to the position of the dropdown is needed to make it look as intended, nothing more elegant could make this work -->
+                                <ul id="graph-data-list" style="right: -20%">
+                                    <li><h3>Magnitude</h3></li>
+                                    <li><h3>Ax</h3></li>
+                                    <li><h3>Ay</h3></li>
+                                    <li><h3>Az</h3></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>  
                 <canvas id="graph"></canvas>
             </div>
             <div class="container" id="map-div">
@@ -54,40 +75,52 @@
         </div>
 
         <div class="container" id="right-div">
-            <div id="log-header">
+            <div class="header">
                 <h2>Log</h2>
-                <h3>Local</h3>
-                <img src="../icons/arrow.svg" alt="arrow" id="select-interval">
+                <nav class="navbar">
+                    <ul>
+                        <li>
+                            <h3 id="selected-scope">Local<img src="../icons/arrow.svg" alt="arrow" class="arrow-img"></h3>
+                            <ul id="log-scope-list" style="right: -20%">
+                                <li><h3 id="interval0">Local</h3></li>
+                                <li><h3 id="interval1">Global</h3></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
             </div>
             <div id="log-entries">
                 <div class="entry">
                     <h2>x minutes ago</h2>
-                    <h3>3.2 AVG</h3>
-                    <h3>4.5 MAX</h3>
+                    
+                    <h3><span>3.2 </span><span style="color: grey;"> AVG</span></h3>
+
+                    <h3><span>4.1 </span><span style="color: grey;"> MAX</span></h3>
+
                     <h4>2023-09-29 14:25:40  |  52° 13’ 24.19’’, 6° 53’ 7.52’’</h4>
                 </div>
                 <div class="entry">
                     <h2>x minutes ago</h2>
-                    <h3>3.2 AVG</h3>
-                    <h3>4.5 MAX</h3>
+                    <h3>3.2 <span style="color: grey;">AVG</span></h3>
+                    <h3>4.1 <span style="color: grey;">MAX</span></h3>
                     <h4>2023-09-29 14:25:40  |  52° 13’ 24.19’’, 6° 53’ 7.52’’</h4>
                 </div>
                 <div class="entry">
                     <h2>x minutes ago</h2>
-                    <h3>3.2 AVG</h3>
-                    <h3>4.5 MAX</h3>
+                    <h3>3.2 <span style="color: grey;">AVG</span></h3>
+                    <h3>4.1 <span style="color: grey;">MAX</span></h3>
                     <h4>2023-09-29 14:25:40  |  52° 13’ 24.19’’, 6° 53’ 7.52’’</h4>
                 </div>
                 <div class="entry">
                     <h2>x minutes ago</h2>
-                    <h3>3.2 AVG</h3>
-                    <h3>4.5 MAX</h3>
+                    <h3>3.2 <span style="color: grey;">AVG</span></h3>
+                    <h3>4.1 <span style="color: grey;">MAX</span></h3>
                     <h4>2023-09-29 14:25:40  |  52° 13’ 24.19’’, 6° 53’ 7.52’’</h4>
                 </div>
                 <div class="entry">
                     <h2>x minutes ago</h2>
-                    <h3>3.2 AVG</h3>
-                    <h3>4.5 MAX</h3>
+                    <h3>3.2 <span style="color: grey;">AVG</span></h3>
+                    <h3>4.1 <span style="color: grey;">MAX</span></h3>
                     <h4>2023-09-29 14:25:40  |  52° 13’ 24.19’’, 6° 53’ 7.52’’</h4>
                 </div>
             </div>
@@ -97,6 +130,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
+    <script src="../scripts/dashboardPopups.js"></script>
     <script src="../scripts/dataVisualization.js"></script>
 </body>
 
