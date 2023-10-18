@@ -3,50 +3,64 @@ function goToRegister() {
     let loginBox = document.getElementById('loginContainer');
     loginBox.innerHTML = `
         <div class="registerContainer">
-            <div class="arrow"><img src="../icons/arrow.svg" id="icon" alt="SVG Image" width="100" height="100"></div>
-            <h1 class="earthquakeDetector">EARTHQUAKE DETECTOR</h1>
-            <h1 class="createANewAccount">Create a new account</h1>
-            <div class="boxes">
-                <div class="deviceID"><input type="text" placeholder="Device ID" class="deviceIdInput" id="device"></div>
-                <div class="registerUsername"><input type="text" placeholder="Username" class="registerUsernameInput" id="registerUsername"></div>
-                <div class="registerPassword"><input type="password" placeholder="Password" class="registerPasswordInput" id="registerPassword"></div>
-                <div class="confirmPassword"><input type="password" placeholder="Confirm Password" class="confirmPasswordInput" id="confirmPassword"></div>
+            <div><img src="../static/icons/arrow.svg" id="back" alt="arrow" class="arrow"></div>
+            <h1 id="earthquakeDetector">EARTHQUAKE DETECTOR</h1>
+            <h1 class="loginToContinue">Create a new account</h1>
+            <form action="/register" method="post">
+                <div class="deviceID">
+                <label for="device"></label>
+                <input type="text" id="deviceId" name="deviceId" placeholder="Device ID" required>
             </div>
-            <div class="registerBox">Register</div>
-      
+            <div class="registerUsername">
+                <label for="registerUsername"></label>
+                <input type="text" id="registerUsername" name="username" placeholder="Username" required>
+            </div>
+            <div class="registerPassword">
+                <label for="registerPassword"></label>
+                <input type="password" id="registerPassword" name="password" placeholder="Password" required>
+            </div>
+            <div class="loginButton">
+                <button type="submit">Register</button>
+            </div>
+            </form>
    </div>
     `;
-    const icon = document.getElementById('icon');
+    const icon = document.getElementById('back');
     icon.addEventListener('click', closeRegister);
 }
 
 
 function closeRegister() {
     let loginBox = document.getElementById('loginContainer');
-    loginBox.innerHTML = `<section id="loginCredentials">
-    <h1 id="earthquakeDetector">EARTHQUAKE DETECTOR</h1>
-        <h1 class="loginToContinue">Log in to continue</h1>
-        <div class="usernameBox">
-            <label>
-                <input type="text" placeholder="Username" class="usernameInput" id="username">
-            </label>
-        </div>
-        <div class="passwordBox">
-            <label>
-                <input type="password" placeholder="Password" class="passwordInput" id="password">
-            </label>
-        </div>
-        <div class="loginButton">Log in</div>
-        <h3 class="or">Or</h3>
-
-        <div class="lines">
-            <div class="line1"> </div>
-            <div class="line2"> </div>
+    loginBox.innerHTML = `
+        <div>
+            <h1 id="earthquakeDetector">EARTHQUAKE DETECTOR</h1>
+            <h1 class="loginToContinue">Log in to continue</h1>
         </div>
 
-        <button class="registerButton" onclick="goToRegister()">Register</button>
+        <form action="/login" method="post" id="login-form">
+            <div class="usernameInput">
+                <label for="username"></label>
+                <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div class="passwordInput">
+                <label for="password"></label>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="loginButton">
+                <button type="submit">Log in</button>
+            </div>
+        </form>
 
-</section>`;
+        <div>
+            <h3 class="or">Or</h3>
 
+            <div class="lines">
+                <div class="line1"></div>
+                <div class="line2"></div>
+            </div>
+        </div>
+
+        <button class="registerButton" onclick="goToRegister()">Register</button>`;
 }
 

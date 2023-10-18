@@ -14,6 +14,7 @@ bp = Blueprint('auth', __name__)
 def register():
     # Get the values from the HTML <form> element
     username = request.form['username']
+    device_id = request.form['deviceId']
     password = request.form['password']
     db = get_db()
     error = None
@@ -27,8 +28,8 @@ def register():
         try:
             # Insert a new user into the database
             db.execute(
-                "INSERT INTO user (username, password) VALUES (?, ?)",
-                (username, generate_password_hash(password)),
+                "INSERT INTO user (username, deviceId, password) VALUES (?, ?, ?)",
+                (username, device_id, generate_password_hash(password)),
             )
             db.commit()
         except db.IntegrityError:
@@ -57,11 +58,16 @@ def login():
             # Create a session for the authenticated user
             session.clear()
             session['user_id'] = user['id']
-            return render_template('dashboard.html')
+            return redirect(url_for('auth.get_dash'))
 
         flash(error)
 
     return render_template('login.html')
+
+
+@bp.route('/dash', methods=['GET'])
+def get_dash():
+    return render_template('dashboard.html')
 
 
 # Load the logged-in user's information before each request

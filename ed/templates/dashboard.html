@@ -32,7 +32,7 @@
                 <h3 id="mode">Standard</h3>
             </div>
             <div id="device-bottom-icons">
-                <img src="../static/icons/sign-out.svg" alt="sign-out" id="sign-out-icon">
+                <a href="{{ url_for('auth.logout') }}"><img src="../static/icons/sign-out.svg" alt="sign-out" id="sign-out-icon"></a>
                 <!-- todo: add icon to edit profile (reset password) -->
             </div>
         </div>
@@ -47,7 +47,7 @@
                                 <h3 id="selected-time-interval">30 sec<img src="../static/icons/arrow.svg" alt="arrow" class="arrow-img"></h3>
                                 <ul id="interval-list" style="right: 40%">
                                     <li><h3>5 sec</h3></li>
-                                    <li><h3">30 sec</h3></li>
+                                    <li><h3>30 sec</h3></li>
                                     <li><h3>1 min</h3></li>
                                     <li><h3>5 min</h3></li>
                                 </ul>

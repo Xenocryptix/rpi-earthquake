@@ -6,6 +6,10 @@ html, body {
 
 
 .loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -42,37 +46,34 @@ html, body {
     font-size: 1.3vw;
 
     display: block;
-    text-align: center;
 }
 
-.usernameInput, .passwordInput {
+form {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+input[type='text'], input[type='password']{
     width: 20vw;
     height: 5vh;
     border-radius: 0.5vw;
-    margin-left: 8%;
-    margin-top: 5%;
     font-family: Inter, sans-serif;
     font-size: 1vw;
     color: black;
     font-weight: 400;
-    text-indent: 1%;
-
-}
-
-input {
-    font-family: Inter, sans-serif;
 }
 
 .passwordInput::placeholder, .usernameInput::placeholder {
     text-indent: 1%;
 }
 
-.loginButton {
+.loginButton button {
     width: 20.4vw;
     height: 5.7vh;
     border-radius: 0.5vw;
-    margin-left: 8%;
-    margin-top: 5%;
     font-family: Inter, sans-serif;
     font-size: 1.2vw;
     font-weight: 600;
@@ -123,16 +124,12 @@ input {
     width: 20.4vw;
     height: 5.7vh;
     border-radius: 0.5vw;
-    margin-left: 8%;
-    margin-top: 3%;
-    margin-bottom: 15%;
     font-family: Inter, sans-serif;
     font-size: 1.2vw;
     font-weight: 600;
     text-align: center;
     color: #0073DE;
     background-color: white;
-    z-index: 5;
     line-height: 5.5vh;
     border-color: #0073DE;
 }
@@ -142,11 +139,11 @@ input {
 
 
 .arrow {
-    transform: rotate(180deg) scale(0.2);
-    width: 0.1vw;
-    height: 0.1vw;
-    margin-left: 5%;
-    margin-top: 10%;
+    position: absolute;
+    left: 1.7rem;
+    top: 3.7rem;
+    width: 1.3rem;
+    transform: rotate(180deg);
 }
 
 .earthquakeDetector {
@@ -162,7 +159,6 @@ input {
 }
 
 .createANewAccount {
-    margin-top: 15%;
     font-size: 1.4vw;
 }
 

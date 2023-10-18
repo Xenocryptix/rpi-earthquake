@@ -12,24 +12,32 @@
 <body>
 <section id="loginCredentials">
     <div class="loginContainer" id="loginContainer">
-        <h1 id="earthquakeDetector">EARTHQUAKE DETECTOR</h1>
-        <h1 class="loginToContinue">Log in to continue</h1>
-        <div class="usernameBox">
-            <label>
-                <input type="text" placeholder="Username" class="usernameInput" id="username">
-            </label>
+        <div>
+            <h1 id="earthquakeDetector">EARTHQUAKE DETECTOR</h1>
+            <h1 class="loginToContinue">Log in to continue</h1>
         </div>
-        <div class="passwordBox">
-            <label>
-                <input type="password" placeholder="Password" class="passwordInput" id="password">
-            </label>
-        </div>
-        <div class="loginButton">Log in</div>
-        <h3 class="or">Or</h3>
 
-        <div class="lines">
-            <div class="line1"> </div>
-            <div class="line2"> </div>
+        <form method="post" id="login-form">
+            <div class="usernameInput">
+                <label for="username"></label>
+                <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div class="passwordInput">
+                <label for="password"></label>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="loginButton">
+                <button type="submit">Log in</button>
+            </div>
+        </form>
+
+        <div>
+            <h3 class="or">Or</h3>
+
+            <div class="lines">
+                <div class="line1"></div>
+                <div class="line2"></div>
+            </div>
         </div>
 
         <button class="registerButton" onclick="goToRegister()">Register</button>
