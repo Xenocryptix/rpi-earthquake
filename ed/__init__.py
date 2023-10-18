@@ -1,9 +1,9 @@
 import os
 
-from flask import Flask, render_template
+from flask import Flask
 
-
-def create_app(test_config=None):
+# Creates and initializes the app
+def create_app():
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
@@ -11,22 +11,17 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'ed.sqlite'),
     )
 
-    if test_config is None:
-        # load the instance config, if it exists, when not testing
-        app.config.from_pyfile('config.py', silent=True)
-    else:
-        # load the test config if passed in
-        app.config.from_mapping(test_config)
-
     # ensure the instance folder exists
     try:
         os.makedirs(app.instance_path)
     except OSError:
         pass
 
+    # Import and initialize the database utility from the 'utils' module
     from .utils import db
     db.init_app(app)
 
+    # Import and register the 'auth' blueprint from the 'utils' module
     from .utils import auth
     app.register_blueprint(auth.bp)
 

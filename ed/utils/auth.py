@@ -12,6 +12,7 @@ bp = Blueprint('auth', __name__)
 
 @bp.route('/register', methods=['POST'])
 def register():
+    # Get the values from the HTML <form> element
     username = request.form['username']
     password = request.form['password']
     db = get_db()
@@ -24,17 +25,16 @@ def register():
 
     if error is None:
         try:
+            # Insert a new user into the database
             db.execute(
                 "INSERT INTO user (username, password) VALUES (?, ?)",
                 (username, generate_password_hash(password)),
             )
             db.commit()
         except db.IntegrityError:
-            error = f"User {username} is already registered."
+            f"User {username} is already registered."
         else:
             return redirect(url_for("auth.login"))
-
-    flash(error)
 
 
 @bp.route('/login', methods=('GET', 'POST'))
@@ -54,15 +54,17 @@ def login():
             error = 'Incorrect password.'
 
         if error is None:
+            # Create a session for the authenticated user
             session.clear()
             session['user_id'] = user['id']
-            return redirect(url_for('index'))
+            return render_template('dashboard.html')
 
         flash(error)
 
     return render_template('login.html')
 
 
+# Load the logged-in user's information before each request
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
@@ -81,6 +83,7 @@ def logout():
     return redirect(url_for('auth.login'))
 
 
+# Decorator function for protecting routes that require authentication
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
