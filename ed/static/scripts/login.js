@@ -1,4 +1,3 @@
-
 function goToRegister() {
     let loginBox = document.getElementById('loginContainer');
     loginBox.innerHTML = `

@@ -1,12 +1,12 @@
-/* styles.css */
 html,
 body {
     height: 100%;
-    font-family: 'Inter', sans-serif;
+    font-family: Inter, sans-serif;
     background-color: #F4F4F4;
     overflow: hidden;
 }
 
+/* General layout */
 .grid-container {
     display: grid;
     gap: 3%;
@@ -22,17 +22,9 @@ body {
     border-radius: 0.8rem;
 }
 
-#title-div {
-    display: flex;
-    justify-content: center;
-    /* Center horizontally */
-    align-items: center;
-    /* Center vertically */
-}
-
+/* Text */
 #title {
     color: #474747;
-    font-family: Inter;
     font-size: 1.4rem;
     font-weight: 200;
     margin-top: 1rem;
@@ -41,30 +33,33 @@ body {
 
 h2 {
     margin-top: 0;
-
     color: #151515;
-    font-family: Inter;
     font-size: 1.4rem;
     font-weight: 600;
 }
 
 h3 {
     color: #151515;
-    font-family: Inter;
     font-size: 1.1rem;
     font-weight: 600;
-
     margin-top: 0;
 }
 
 h4 {
     color: #474747;
-    font-family: Inter;
     font-size: 1rem;
     font-weight: 200;
     margin-bottom: 0;
 }
 
+/* Title div */
+#title-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Device */
 #left-div {
     display: flex;
     flex-direction: column;
@@ -88,11 +83,57 @@ h4 {
     cursor: pointer;
 }
 
+/* Graph / map */
 #center-div {
     display: grid;
     gap: 3%;
     grid-template-rows: 1fr 1fr;
 }
+
+#graph {
+    margin: 4rem 2rem 2rem;
+    width: 100%;
+    border-radius: 1rem;
+}
+
+#map {
+    display: none;
+    height: 70%;
+    background-color: green;
+    border-radius: 1rem;
+    margin: 6% 4% 4%;
+}
+
+/* Logs */
+#log-entries {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    max-height: 85%;
+}
+
+.entry {
+    padding: 4%;
+    border-radius: 0.4rem;
+    border: 2px solid #d0d0d0;
+    margin-bottom: 1rem;
+}
+
+.entry h4 {
+    font-size: 0.5rem;
+    margin-top: 0;
+}
+
+/* Icons */
+.arrow-img {
+    scale: 70%;
+    position: relative;
+    top: 0.3rem;
+    margin: 0 0 0 0.1rem;
+}
+
+/* Navbar */
 .header {
     display: flex;
     flex-direction: row;
@@ -120,10 +161,9 @@ h4 {
 .navbar li {
     display: inline-block;
     margin-left: 1rem;
-
 }
 
-/* Style the dropdown menu */
+/* beyond this point I don't understand it either */
 .navbar ul ul {
     position: absolute;
     top: 100%;
@@ -147,82 +187,7 @@ h4 {
     padding: 1rem;
 }
 
-.arrow-img {
-    scale: 70%;
-    position: relative;
-    top: 0.3rem;
-    margin: 0;
-    margin-left: 0.1rem;
-}
-
-/* Change the background color of dropdown links on hover */
 .navbar ul ul li h3:hover {
     cursor: pointer;
     background-color: #c4c4c4;
-}
-
-#graph {
-    margin: 2rem;
-    margin-top: 4rem;
-    width: 100%;
-    border-radius: 1rem;
-}
-
-#map {
-    display: none;
-    height: 70%;
-    background-color: green;
-    border-radius: 1rem;
-    margin: 4%;
-    margin-top: 6%;
-}
-
-#log-header {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-}
-
-#log-header h3{
-    margin-right: 0;
-    margin-left: auto;
-}
-
-#log-header img {
-    transform: rotate(90deg);
-    height: 1rem;
-    margin-left: 1%;
-    padding: 0.3rem;
-    border-radius: 20%;
-}
-
-#log-header img:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-}
-
-#log-entries {
-    margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    overflow: auto;
-    max-height: 85%;
-}
-
-.entry {
-    padding: 4%;
-    border-radius: 0.4rem;
-    border: 2px solid #d0d0d0;
-    margin-bottom: 1rem;
-}
-
-.entry h3:first-of-type {
-    margin-top: -0.5rem;
-    margin-bottom: 0;
-}
-
-.entry h4 {
-    font-size: 0.5rem;
-    margin-top: 0;
-    text-wrap:nowrap;
 }

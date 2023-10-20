@@ -2,6 +2,7 @@ import os
 
 from flask import Flask
 
+
 # Creates and initializes the app
 def create_app():
     # create and configure the app
@@ -26,4 +27,3 @@ def create_app():
     app.register_blueprint(auth.bp)
 
     return app
-
