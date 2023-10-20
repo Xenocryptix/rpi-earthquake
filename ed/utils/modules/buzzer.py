@@ -1,6 +1,6 @@
-#Libraries
 import RPi.GPIO as GPIO
 from time import sleep
+from MPU6050 import read_accel
 
 #Disable warnings (optional)
 GPIO.setwarnings(False)
@@ -12,11 +12,15 @@ GPIO.setmode(GPIO.BCM)
 buzzer = 5 
 GPIO.setup(buzzer,GPIO.OUT)
 
-#Run forever loop
-while True:
+def activate_buzz():
+    print("Earthquake detected")
     GPIO.output(buzzer,GPIO.HIGH)
-    print ("Beep")
-    sleep(0.5) # Delay in seconds
-    GPIO.output(buzzer,GPIO.LOW)
-    print ("No Beep")
     sleep(0.5)
+    GPIO.output(buzzer,GPIO.LOW)
+    sleep(0.5)
+
+while True:
+    accel = read_accel()
+    if (abs(accel.Gx) > 3 | abs(accel.Gy) > 3 | abs(accel.Gz) > 3):
+        activate_buzz()
+    sleep(1)
