@@ -1,5 +1,14 @@
-const ctx = document.getElementById('graph');
+let socket = io('/random');
+socket.on('connect', function() {
+  socket.emit('connected', {data: 'I\'m connected!'});
+});
 
+socket.on('new_value', function(data) {
+  console.log(data);
+});
+
+// Make chart
+const ctx = document.getElementById('graph');
 Chart.defaults.plugins.legend.display = false;
 
   new Chart(ctx, {
@@ -20,3 +29,6 @@ Chart.defaults.plugins.legend.display = false;
       }
     }
   });
+
+
+

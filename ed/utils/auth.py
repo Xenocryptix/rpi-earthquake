@@ -65,7 +65,20 @@ def login():
     return render_template('login.html')
 
 
+# Decorator function for protecting routes that require authentication
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for('auth.login'))
+
+        return view(**kwargs)
+
+    return wrapped_view
+
+
 @bp.route('/dash', methods=['GET'])
+@login_required  # Apply the login_required decorator here
 def get_dash():
     return render_template('dashboard.html')
 
@@ -87,15 +100,3 @@ def load_logged_in_user():
 def logout():
     session.clear()
     return redirect(url_for('auth.login'))
-
-
-# Decorator function for protecting routes that require authentication
-def login_required(view):
-    @functools.wraps(view)
-    def wrapped_view(**kwargs):
-        if g.user is None:
-            return redirect(url_for('auth.login'))
-
-        return view(**kwargs)
-
-    return wrapped_view
