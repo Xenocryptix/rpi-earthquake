@@ -4,6 +4,7 @@ from flask_socketio import SocketIO
 from .utils import db, auth
 from .utils.dash import generate_random_values
 
+
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     socketio = SocketIO(app)
@@ -26,7 +27,7 @@ def create_app(test_config=None):
     db.init_app(app)
     app.register_blueprint(auth.bp)
 
-    @socketio.on('connect', namespace='/random')
+    @socketio.on('connect', namespace='/datastream')
     def handle_connect():
         print("Client connected")
         if not hasattr(app, 'bg_thread'):
