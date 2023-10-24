@@ -98,12 +98,12 @@ input {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 24vw; /* Adjust the total width of the .lines container */
+    width: 24vw;
 }
 
 
 .line1, .line2 {
-    height: 100%; /* Make the lines the same height as the container */
+    height: 100%;
     background-color: #000;
     margin-top: -11%;
 }
