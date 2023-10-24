@@ -13,6 +13,9 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
+    # This is not safe and should be removed when doing security
+    # Sometimes the page did not load and I got a 403, this fixed it
+    app.config['WTF_CSRF_ENABLED'] = False
 
     if test_config is None:
         app.config.from_pyfile('config.py', silent=True)

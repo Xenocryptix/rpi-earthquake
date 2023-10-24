@@ -33,7 +33,7 @@ def register():
             )
             db.commit()
         except db.IntegrityError:
-            f"User {username} is already registered."
+            return f"User {username} is already registered."
         else:
             return redirect(url_for("auth.login"))
 
@@ -78,7 +78,7 @@ def login_required(view):
 
 
 @bp.route('/dash', methods=['GET'])
-@login_required  # Apply the login_required decorator here
+# @login_required  # Apply the login_required decorator here
 def get_dash():
     return render_template('dashboard.html')
 
