@@ -1,17 +1,12 @@
-const dataBuffer = {
-  labels: [],
-  data: [],
-};
-
-const ctx = document.getElementById('graph').getContext('2d');
-const lineChart = new Chart(ctx, {
+const bufferLength = 10;
+const chartOptions = {
   type: 'line',
   data: {
-    labels: dataBuffer.labels,
+    labels: [],
     datasets: [
       {
         label: 'Ay',
-        data: dataBuffer.data,
+        data: [],
         borderColor: 'blue',
         fill: false,
       }
@@ -21,7 +16,7 @@ const lineChart = new Chart(ctx, {
     scales: {
       x: {
         grid: {
-          display: false, // Remove x-axis grid lines if not needed
+          display: false,
         }
       },
       y: {
@@ -30,37 +25,86 @@ const lineChart = new Chart(ctx, {
       },
     },
     animation: {
-      duration: 100
+      duration: 150,
     },
     plugins: {
       legend: {
-        display: false, // Hide the dataset label
+        display: false,
       }
     },
     ticks: {
-      stepSize: 0.25, // Adjust the step size based on your data range
+      stepSize: 0.33,
     },
   }
-});
+};
 
-// WebSocket data handling
-let socket = io('/datastream');
+const ctx = document.getElementById('graph').getContext('2d');
+const lineChart = new Chart(ctx, chartOptions);
 
-socket.on('data', function(data) {
-  console.log(`Ay: ${data.ay}`);
+const dataBuffer = {
+  timestamps: [],
+  ax: [],
+  ay: [],
+  az: [],
+  magnitude: [],
+};
 
-  // Assuming `data.timestamp` contains the timestamp for the data point
-  const timestamp = new Date(Date.now()).toLocaleTimeString()
+let displayedData = 'ax';
 
-  // Add the new data point and timestamp
-  dataBuffer.labels.push(timestamp);
-  dataBuffer.data.push(data.ay);
+function handleIncomingData(data) {
+  const { ax, ay, az, magnitude } = data;
+  const timestamp = new Date().toLocaleTimeString();
 
-  // Remove the oldest data point if the buffer size exceeds 7
-  if (dataBuffer.labels.length > 7) {
-    dataBuffer.labels.shift();
-    dataBuffer.data.shift();
+  dataBuffer.timestamps.push(timestamp);
+  dataBuffer.ax.push(ax);
+  dataBuffer.ay.push(ay);
+  dataBuffer.az.push(az);
+  dataBuffer.magnitude.push(magnitude);
+
+  if (dataBuffer.timestamps.length > bufferLength) {
+    dataBuffer.timestamps.shift();
+    dataBuffer.ax.shift();
+    dataBuffer.ay.shift();
+    dataBuffer.az.shift();
+    dataBuffer.magnitude.shift();
+  }
+  lineChart.data.labels = dataBuffer.timestamps;
+  lineChart.data.datasets[0].data = dataBuffer[displayedData];
+  lineChart.update();
+}
+
+function changeDisplayedData(type) {
+  if (type === displayedData) {
+    return; // No need to change if it's the same data
+  }
+  displayedData = type;
+  lineChart.update();
+
+
+  let borderColor;
+  switch (type) {
+    case 'ax':
+      borderColor = 'blue';
+      break;
+    case 'ay':
+      borderColor = 'green';
+      break;
+    case 'az':
+      borderColor = 'red';
+      break;
+    case 'magnitude':
+      borderColor = 'purple';
+      break;
+    default:
+      // Handle any other cases or data types here
+      borderColor = 'blue'; // Default to 'ax' data
+      break;
   }
 
-  lineChart.update()
-});
+  lineChart.data.datasets[0].borderColor = borderColor;
+  lineChart.update();
+}
+
+let socket = io('/datastream');
+
+socket.on('data', handleIncomingData);

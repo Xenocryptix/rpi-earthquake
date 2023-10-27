@@ -10,7 +10,7 @@ body {
 .grid-container {
     display: grid;
     gap: 3%;
-    grid-template-columns: 2fr 3fr 2fr;
+    grid-template-columns: 1fr 2fr 1fr;
     grid-template-rows: 3% 80%;
     padding: 3%;
     height: 100%;
@@ -95,6 +95,11 @@ h4 {
     width: 100%;
     margin-top: 2rem;
 }
+
+/*#graph {*/
+/*    width: 300px;*/
+/*    height: 200px;*/
+/*}*/
 
 #map {
     display: none;
