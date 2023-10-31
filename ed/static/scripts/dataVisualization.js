@@ -9,8 +9,12 @@ const dataBuffer = {
 };
 
 const bufferLength = 25; // Adjust the size as per your requirement
+
 for (let i = 0; i < bufferLength; i++) {
   dataBuffer.ax.push(0);
+  dataBuffer.ay.push(0);
+  dataBuffer.az.push(0);
+  dataBuffer.magnitude.push(0);
 }
 
 let displayedDataType = 'ax';
