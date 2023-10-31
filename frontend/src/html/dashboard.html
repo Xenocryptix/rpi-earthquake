@@ -12,6 +12,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
 
+<!--    Cenk's implementation -->
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <style>
+        #map {position: absolute; top: 0; right: 0; bottom: 0; left: 0;}
+    </style>
+    <!--    Cenk's implementation -->
+
     <title>Earthquake Detector</title>
 </head>
 
@@ -47,7 +56,7 @@
                                 <h3 id="selected-time-interval">30 sec<img src="../icons/arrow.svg" alt="arrow" class="arrow-img"></h3>
                                 <ul id="interval-list" style="right: 40%">
                                     <li><h3>5 sec</h3></li>
-                                    <li><h3">30 sec</h3></li>
+                                    <li><h3>30 sec</h3></li>
                                     <li><h3>1 min</h3></li>
                                     <li><h3>5 min</h3></li>
                                 </ul>
@@ -70,7 +79,13 @@
             </div>
             <div class="container" id="map-div">
                 <h2>Map</h2>
-                <div id="map"></div>
+<!--                Cenk's implementation-->
+                <div id="map">
+                    <a href="https://www.maptiler.com" style="position:absolute;left:10px;bottom:10px;z-index:999;"><img src="https://api.maptiler.com/resources/logo.svg" alt="MapTiler logo"></a>
+                </div>
+                <p><a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a></p>
+<!--                Cenk's implementation-->
+
             </div>
         </div>
 
@@ -132,6 +147,23 @@
 
     <script src="../scripts/dashboardPopups.js"></script>
     <script src="../scripts/dataVisualization.js"></script>
+
+<!--    Cenk's implementation-->
+<script>
+    var map = L.map('map').setView([40.7590403,-74.039271], 8);
+    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=xinj6wTWg04tHLy3VyQd',{
+        tileSize: 512,
+        zoomOffset: -1,
+        minZoom: 1,
+        attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
+        crossOrigin: true
+    }).addTo(map);
+
+    var marker = L.marker([52.239848233169965, 6.849859153909583]).addTo(map);
+    marker.bindPopup("<iframe src='https://www.google.com/maps?q=40.7590403,-74.039271+&output=embed'></iframe>");
+</script>
+<!--Cenk's implementation-->
+
 </body>
 
 </html>
