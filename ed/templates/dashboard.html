@@ -6,7 +6,7 @@
     <!-- ensure that the page is properly displayed on different devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../static/css/dashboard.css">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,7 +41,7 @@
                 <h3 id="mode">Standard</h3>
             </div>
             <div id="device-bottom-icons">
-                <img src="../icons/sign-out.svg" alt="sign-out" id="sign-out-icon">
+                <a href="{{ url_for('auth.logout') }}"><img src="../static/icons/sign-out.svg" alt="sign-out" id="sign-out-icon"></a>
                 <!-- todo: add icon to edit profile (reset password) -->
             </div>
         </div>
@@ -53,7 +53,7 @@
                     <nav class="navbar">
                         <ul>
                             <li>
-                                <h3 id="selected-time-interval">30 sec<img src="../icons/arrow.svg" alt="arrow" class="arrow-img"></h3>
+                                <h3 id="selected-time-interval">30 sec<img src="../static/icons/arrow.svg" alt="arrow" class="arrow-img"></h3>
                                 <ul id="interval-list" style="right: 40%">
                                     <li><h3>5 sec</h3></li>
                                     <li><h3>30 sec</h3></li>
@@ -63,19 +63,20 @@
                             </li>
     
                             <li>
-                                <h3 id="selected-graph-data">Magnitude<img src="../icons/arrow.svg" alt="arrow" class="arrow-img"></h3>
-                                <!-- this weird adjustment to the position of the dropdown is needed to make it look as intended, nothing more elegant could make this work -->
+                                <h3 id="selected-graph-data">Ax<img src="../static/icons/arrow.svg" alt="arrow" class="arrow-img"></h3>
                                 <ul id="graph-data-list" style="right: -20%">
-                                    <li><h3>Magnitude</h3></li>
-                                    <li><h3>Ax</h3></li>
-                                    <li><h3>Ay</h3></li>
-                                    <li><h3>Az</h3></li>
+                                    <li id="opt-magnitude"><h3>Magnitude</h3></li>
+                                    <li id="opt-ax"><h3>Ax</h3></li>
+                                    <li id="opt-ay"><h3>Ay</h3></li>
+                                    <li id="opt-az"><h3 >Az</h3></li>
                                 </ul>
                             </li>
                         </ul>
                     </nav>
-                </div>  
-                <canvas id="graph"></canvas>
+                </div>
+                <div id="graph-container">
+                    <svg id="graph"></svg>
+                </div>
             </div>
             <div class="container" id="map-div">
                 <h2>Map</h2>
@@ -95,7 +96,7 @@
                 <nav class="navbar">
                     <ul>
                         <li>
-                            <h3 id="selected-scope">Local<img src="../icons/arrow.svg" alt="arrow" class="arrow-img"></h3>
+                            <h3 id="selected-scope">Local<img src="../static/icons/arrow.svg" alt="arrow" class="arrow-img"></h3>
                             <ul id="log-scope-list" style="right: -20%">
                                 <li><h3 id="interval0">Local</h3></li>
                                 <li><h3 id="interval1">Global</h3></li>
@@ -142,9 +143,13 @@
         </div>
     </div>
 
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
 
+
+    <script src="../static/scripts/dashboardInteraction.js"></script>
+    <script src="../static/scripts/dataVisualization.js"></script>
     <script src="../scripts/dashboardPopups.js"></script>
     <script src="../scripts/dataVisualization.js"></script>
 
