@@ -16,9 +16,9 @@ for (let i = 0; i < bufferLength; i++) {
 let displayedDataType = 'ax';
 
 // Define the size of the chart and margins
-const margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+const margin = {top: 10, right: 20, bottom: 50, left: 40},
+    width = 700 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
 
 // Set the ranges of the axes
 const x = d3.scaleLinear().range([0, width]);
@@ -58,13 +58,13 @@ const path = chartBody.append("path")
     .attr("class", "line")
     .attr("d", valueLine)
     .attr("fill", "none")
-    .attr("stroke", "steelblue")
-    .attr("stroke-width", 2);
+    .attr("stroke", "rgba(0, 68, 255, 0.9)")
+    .attr("stroke-width", 3);
 
 // Add the X Axis outside the clip path to ensure it's not clipped
-// svg.append("g")
-//     .attr("transform", "translate(0," + height/2 + ")")
-//     .call(d3.axisBottom(x));
+svg.append("g")
+    .attr("transform", "translate(0," + height/2 + ")")
+    .call(d3.axisBottom(x));
 
 // Add the Y Axis
 svg.append("g")
@@ -73,7 +73,7 @@ svg.append("g")
 // Function to update the chart with new data
 function updateChart(newData) {
   // Push a new data point onto the back.
-  dataBuffer.ax.push(newData);
+  dataBuffer[displayedDataType].push(newData);
 
   // Redraw the line, and slide it to the left.
   path
@@ -86,24 +86,68 @@ function updateChart(newData) {
       .on("end", function() {
         // When the transition finishes, we remove the oldest data point
         // and call the update function again.
-        dataBuffer.ax.shift();
+        dataBuffer[displayedDataType].shift();
         updateChart(newData); // Recursive call to keep the data flowing
       });
 }
 
 // Handle incoming data
 socket.on('data', function(data) {
-  updateRateMs = data.rate - 10; // To compensate for network delay
+  updateRateMs = data.rate - 50; // To compensate for network delay
 
-  const ax = data.ax;
-  const ay = data.ay;
-  const az = data.az;
-  const magnitude = data.magnitude;
+  // Add incoming data to the dataBuffer
+  dataBuffer.ax.push(data.ax);
+  dataBuffer.ay.push(data.ay);
+  dataBuffer.az.push(data.az);
+  dataBuffer.magnitude.push(data.magnitude);
 
   // Only call updateChart if there's new data, to avoid infinite loop during periods without data
-  if (data.ax !== undefined) {
-    updateChart(data.ax); // Call the update function with the new data
+  if (data[displayedDataType] !== undefined) {
+    updateChart(data[displayedDataType]); // Call the update function with the new data
   }
 });
+
+
+function changeDisplayedData(value) {
+  displayedDataType = value; // Update the global variable
+
+  // Update the path data to reflect the new data type
+  path.data([dataBuffer[displayedDataType]]);
+
+  // Change the line color based on the selected data type
+  let lineColor;
+  switch (value) {
+    case 'ax':
+      lineColor = "rgba(0, 68, 255, 0.9)"; // original color for ax
+      y.domain([-1, 1]); // original y-axis domain
+      break;
+    case 'ay':
+      lineColor = "rgba(255, 0, 0, 0.9)"; // red for ay
+      y.domain([-1, 1]); // original y-axis domain
+      break;
+    case 'az':
+      lineColor = "rgba(0, 255, 0, 0.9)"; // green for az
+      y.domain([-1, 1]); // original y-axis domain
+      break;
+    case 'magnitude':
+      lineColor = "rgba(255, 0, 255, 0.9)"; // magenta for magnitude
+      y.domain([0, 10]); // y-axis domain for magnitude
+      break;
+    default:
+      lineColor = "rgba(0, 68, 255, 0.9)"; // default color
+      y.domain([-1, 1]); // default y-axis domain
+      break;
+  }
+  path.attr("stroke", lineColor);
+
+  // Redraw the y-axis with the updated domain
+  svg.select("g").call(d3.axisLeft(y));
+
+  // Redraw the line
+  path.attr("d", valueLine);
+}
+
+
+
 
 

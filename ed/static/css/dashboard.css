@@ -93,7 +93,8 @@ h4 {
 #graph-container {
     height: 100%;
     width: 100%;
-    margin-top: 2rem;
+    display: flex;
+    align-items: center;
 }
 
 #map {
