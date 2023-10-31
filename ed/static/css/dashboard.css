@@ -126,9 +126,20 @@ h4 {
     margin-bottom: 1rem;
 }
 
-.entry h4 {
+.entry-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.entry-top h4 {
     font-size: 0.5rem;
     margin-top: 0;
+}
+
+.entry-circle {
+    margin-right: 0.2rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 /* Icons */

@@ -97,7 +97,7 @@ function updateChart(newData) {
 
 // Handle incoming data
 socket.on('data', function(data) {
-  updateRateMs = data.rate - 50; // To compensate for network delay
+  updateRateMs = data.rate - 2; // To compensate for network delay
 
   // Add incoming data to the dataBuffer
   dataBuffer.ax.push(data.ax);
