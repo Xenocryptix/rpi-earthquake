@@ -1,10 +1,13 @@
 import math
 import random
 
+from ed import socketio
 
-def generate_random_values(socketio):
+
+def generate_random_values():
     update_rate_ms = 400
     sleep_time = update_rate_ms * 0.001
+
     while True:
         ax = random.uniform(-1.0, 1)
         ay = random.uniform(-1.0, 1)
