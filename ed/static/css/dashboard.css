@@ -208,3 +208,12 @@ h4 {
     cursor: pointer;
     background-color: #c4c4c4;
 }
+
+#passwordChange {
+    margin-left: 80%;
+    transform: scale(1.8);
+    width: 5vw;
+
+}
+
+
