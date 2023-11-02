@@ -97,12 +97,17 @@ h4 {
     align-items: center;
 }
 
+#map-div {
+    position: relative; /* This ensures that the absolute positioning of child elements is relative to this container */
+}
+
 #map {
-    display: none;
-    height: 70%;
-    background-color: green;
-    border-radius: 1rem;
-    margin: 6% 4% 4%;
+    width: 100%;
+    height: 100%;
+    position: absolute; /* This will make the map take up the full space of its parent container */
+    border-radius: inherit;
+    top: 0;
+    left: 0;
 }
 
 /* Logs */
@@ -121,9 +126,20 @@ h4 {
     margin-bottom: 1rem;
 }
 
-.entry h4 {
+.entry-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.entry-top h4 {
     font-size: 0.5rem;
     margin-top: 0;
+}
+
+.entry-circle {
+    margin-right: 0.2rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 /* Icons */
@@ -192,3 +208,12 @@ h4 {
     cursor: pointer;
     background-color: #c4c4c4;
 }
+
+#passwordChange {
+    margin-left: 80%;
+    transform: scale(1.8);
+    width: 5vw;
+
+}
+
+

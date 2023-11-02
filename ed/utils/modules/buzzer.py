@@ -1,16 +1,16 @@
 import RPi.GPIO as GPIO
 from time import sleep
-from MPU6050 import read_accel
-
-#Disable warnings (optional)
-GPIO.setwarnings(False)
-
-#Select GPIO mode
-GPIO.setmode(GPIO.BCM)
+from ed.utils.modules.MPU6050 import read_accel
 
 #Set buzzer - pin 23 as output
-buzzer = 5 
-GPIO.setup(buzzer,GPIO.OUT)
+buzzer = 5
+
+def buzz_init():
+    #Disable warnings (optional)
+    GPIO.setwarnings(False)
+    #Select GPIO mode
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(buzzer,GPIO.OUT)
 
 def activate_buzz():
     print("Earthquake detected")
