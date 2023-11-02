@@ -21,7 +21,7 @@ def send_accel():
     while True:
         readings = read_accel()
 
-        magnitude = get_vector_acc(readings['ax'], readings['ay'], readings['az'] - 0.98)
+        magnitude = readings['mag']
         # check_alert(magnitude)
 
         #In the case of alerts
@@ -29,12 +29,6 @@ def send_accel():
             print("ALERT")
             socketio.emit('alert', {'magnitude': magnitude}, namespace='/datastream')
             #todo: activate buzzer
-
-        #Print to LCD
-        write_str(0, 0, f"ax:{readings['ax']:.2f}")
-        write_str(1, 0, f"ay:{readings['ay']:.2f}")
-        write_str(2, 0, f"az:{readings['az']:.2f}")
-        write_str(3, 0, f"mag:{magnitude:.2f}")
 
         #Send to backend
         socketio.emit('data', {

@@ -69,7 +69,8 @@ readings = {
     'az': 0.0,
     'gx': 0.0,
     'gy': 0.0,
-    'gz': 0.0
+    'gz': 0.0,
+    'mag': 0.0
 }
 
 def read():
@@ -77,6 +78,7 @@ def read():
 
     MPU_Init()
     print("sensor initialized")
+    from ed.utils.modules.LCD import write_str
 
     while True:
         acc_x = read_raw_data(ACCEL_XOUT)
@@ -93,8 +95,19 @@ def read():
             readings['gx'] = gyro_x / 131.0
             readings['gy'] = gyro_y / 131.0
             readings['gz'] = gyro_z / 131.0
+            readings['mag'] = get_vector_acc(readings['ax'], readings['ay'], readings['az'] - 0.98)
+
+            #Print to LCD
+            write_str(0, 0, f"ax:{readings['ax']:.2f}")
+            write_str(1, 0, f"ay:{readings['ay']:.2f}")
+            write_str(2, 0, f"az:{readings['az']:.2f}")
+            write_str(3, 0, f"mag:{readings['mag']:.2f}")
+
         
 
 def read_accel():
     with readings_lock:
         return readings.copy()
+    
+def get_vector_acc(x, y, z):
+    return math.sqrt(x*x + y*y + z*z)
