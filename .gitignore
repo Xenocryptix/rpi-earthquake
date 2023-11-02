@@ -11,4 +11,6 @@
 
 # Built Visual Studio Code Extensions
 *.vsix
-venv/lib/python3.9/site-packages/certifi
+
+#Ignore certs because Git bad
+*.pem
