@@ -102,8 +102,8 @@ def read():
             write_str(1, 0, f"ay:{readings['ay']:.2f}")
             write_str(2, 0, f"az:{readings['az']:.2f}")
             write_str(3, 0, f"mag:{readings['mag']:.2f}")
-
         
+
 
 def read_accel():
     with readings_lock:

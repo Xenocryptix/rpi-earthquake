@@ -2,25 +2,26 @@ import RPi.GPIO as GPIO
 from time import sleep
 from ed.utils.modules.MPU6050 import read_accel
 
+frequency = 2000            # You can adjust this frequency
+duty_cycle = 50             # You can adjust this duty cycle (0% to 100%)
+buzzer = 5                  # Set buzzer - pin 23 as output
+GPIO.setwarnings(False)     # Disable warnings (optional)
+GPIO.setmode(GPIO.BCM)      # Select GPIO mode
+
+# Set the PWM frequency and duty cycle
+frequency = 2000
+duty_cycle = 50
 #Set buzzer - pin 23 as output
 buzzer = 5
 
 def buzz_init():
-    #Disable warnings (optional)
-    GPIO.setwarnings(False)
-    #Select GPIO mode
-    GPIO.setmode(GPIO.BCM)
     GPIO.setup(buzzer,GPIO.OUT)
+    # Initialize the PWM signal
+    global bzr
+    bzr = GPIO.PWM(buzzer, frequency)
 
 def activate_buzz():
-    print("Earthquake detected")
-    GPIO.output(buzzer,GPIO.HIGH)
-    sleep(0.5)
-    GPIO.output(buzzer,GPIO.LOW)
-    sleep(0.5)
+    bzr.start(duty_cycle)
 
-while True:
-    accel = read_accel()
-    if (abs(accel.Gx) > 3 | abs(accel.Gy) > 3 | abs(accel.Gz) > 3):
-        activate_buzz()
-    sleep(1)
+def deactivate_buzz():
+    bzr.stop()

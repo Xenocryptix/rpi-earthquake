@@ -6,7 +6,9 @@ magnitude_threshold = 0.3
 def send_accel():
     from ed import app, socketio
     from ed.utils.modules.MPU6050 import read_accel, read
-    from ed.utils.modules.LCD import write_str
+    from ed.utils.modules.buzzer import activate_buzz, buzz_init, deactivate_buzz
+
+    buzz_init()
 
     if not hasattr(app, 'read_acc_thread'):
         try:
@@ -28,7 +30,9 @@ def send_accel():
         if magnitude > magnitude_threshold:
             print("ALERT")
             socketio.emit('alert', {'magnitude': magnitude}, namespace='/datastream')
-            #todo: activate buzzer
+            activate_buzz()
+        else:
+            deactivate_buzz()
 
         #Send to backend
         socketio.emit('data', {
