@@ -141,14 +141,19 @@ socket.on('data', function(data) {
   dataBuffer.magnitude.push(data.magnitude);
 
   // Temporary solution for the demo
-  if(data.magnitude > 0.5) {
-    addLogEntry(data)
-  }
+  // if(data.magnitude > 0.5) {
+  //   addLogEntry(data)
+  // }
 
   // Only call updateChart if there's new data, to avoid infinite loop during periods without data
   if (data[displayedDataType] !== undefined) {
     updateChart(); // Call the update function with the new data
   }
+});
+
+//Handle alerts
+socket.on('alert', function (data) {
+  addLogEntry(data)
 });
 
 function changeDisplayedData(value) {

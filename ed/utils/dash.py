@@ -1,5 +1,5 @@
 import math
-
+import json
 
 magnitude_threshold = 0.3
 
@@ -24,11 +24,19 @@ def send_accel():
         magnitude = get_vector_acc(readings['ax'], readings['ay'], readings['az'] - 0.98)
         # check_alert(magnitude)
 
+        #In the case of alerts
+        if magnitude > magnitude_threshold:
+            print("ALERT")
+            socketio.emit('alert', {'magnitude': magnitude}, namespace='/datastream')
+            #todo: activate buzzer
+
+        #Print to LCD
         write_str(0, 0, f"ax:{readings['ax']:.2f}")
         write_str(1, 0, f"ay:{readings['ay']:.2f}")
         write_str(2, 0, f"az:{readings['az']:.2f}")
         write_str(3, 0, f"mag:{magnitude:.2f}")
 
+        #Send to backend
         socketio.emit('data', {
             'magnitude': magnitude,
             'ax': readings['ax'],
@@ -36,7 +44,6 @@ def send_accel():
             'az': readings['az'],
             'rate': update_rate_ms
         }, namespace='/datastream')
-
 
         socketio.sleep(sleep_time)
 
