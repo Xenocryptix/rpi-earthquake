@@ -151,7 +151,6 @@ socket.on('data', function(data) {
   }
 });
 
-
 function changeDisplayedData(value) {
   displayedDataType = value;
   path.data([dataBuffer[displayedDataType]]);

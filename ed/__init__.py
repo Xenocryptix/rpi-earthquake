@@ -2,10 +2,17 @@ import os
 from flask import Flask
 from flask_socketio import SocketIO
 from ed.utils import db, auth
+from ed.utils import db, auth
 
 app = Flask(__name__, instance_relative_config=True)
 socketio = SocketIO(app)
+app = Flask(__name__, instance_relative_config=True)
+socketio = SocketIO(app)
 
+app.config.from_mapping(
+    SECRET_KEY='dev',
+    DATABASE=os.path.join(app.instance_path, 'ed.sqlite'),
+)
 app.config.from_mapping(
     SECRET_KEY='dev',
     DATABASE=os.path.join(app.instance_path, 'ed.sqlite'),
@@ -15,6 +22,13 @@ try:
     os.makedirs(app.instance_path)
 except OSError:
     pass
+try:
+    os.makedirs(app.instance_path)
+except OSError:
+    pass
+
+db.init_app(app)
+app.register_blueprint(auth.bp)
 
 db.init_app(app)
 app.register_blueprint(auth.bp)

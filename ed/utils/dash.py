@@ -17,6 +17,7 @@ def send_accel():
     update_rate_ms = 400
     sleep_time = update_rate_ms * 0.001
 
+
     while True:
         readings = read_accel()
 

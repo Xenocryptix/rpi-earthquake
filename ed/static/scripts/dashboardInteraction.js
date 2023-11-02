@@ -27,6 +27,7 @@ scopeList.addEventListener('click', function(e) {
 
 
 // Graph data switching
+// Graph data switching
 document.getElementById('opt-magnitude')
     .addEventListener('click', () => changeDisplayedData('magnitude'))
 
