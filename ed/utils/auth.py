@@ -100,3 +100,26 @@ def load_logged_in_user():
 def logout():
     session.clear()
     return redirect(url_for('auth.login'))
+
+#Todo: add /reset to frontend
+@bp.route('/reset', methods=['POST'])
+def reset_password():
+    user_id = session.get('user_id')
+    old_password = request.form(['old_password'])
+    new_password = generate_password_hash(request.form['new_password'])
+    db = get_db()
+    error = None
+    password = db.execute(
+            'SELECT password FROM user WHERE id = ?', (id,)
+    ).fetchone()
+
+    if user_id is None:
+        error = 'Invalid user ID.'
+    elif not check_password_hash(old_password, password):
+        error = 'Incorrect password.'
+    else:
+        g.user = db.execute(
+            'UPDATE user SET password = ? WHERE id = ?;', (password, user_id)
+        ).commit()
+        return redirect(url_for("auth.login"))
+    flash(error)
