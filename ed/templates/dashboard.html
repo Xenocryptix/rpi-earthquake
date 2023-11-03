@@ -46,7 +46,7 @@
             <div id="device-bottom-icons">
                 <a href="{{ url_for('auth.logout') }}"><img src="../static/icons/sign-out.svg" alt="sign-out" id="sign-out-icon"></a>
 <!--                <div id="passwordChange"><img src="../static/icons/profile-pic.svg" alt="change-password" id="change-password-icon"></div>-->
-                <a href="changePassword.html" id="passwordChange"><img src="../static/icons/profile-pic.svg" alt="change-password" id="change-password-icon"></a>
+                <a href="{{ url_for('auth.change_passwd') }}" id="passwordChange"><img src="../static/icons/profile-pic.svg" alt="change-password" id="change-password-icon"></a>
 <!--                <div id="passwordChange"><img src="../static/icons/profile-pic.svg" alt="change-password" id="change-password-icon"></div>-->
                 <a href="changePassword.html" id="passwordChange"><img src="../static/icons/profile-pic.svg" alt="change-password" id="change-password-icon"></a>
                 <!-- todo: add icon to edit profile (reset password) -->

@@ -78,9 +78,14 @@ def login_required(view):
 
 
 @bp.route('/dash', methods=['GET'])
-# @login_required  # Apply the login_required decorator here
+@login_required  # Apply the login_required decorator here
 def get_dash():
     return render_template('dashboard.html')
+
+@bp.route('/change-password', methods=['GET'])
+@login_required  # Apply the login_required decorator here
+def change_passwd():
+    return render_template('changePassword.html')
 
 
 # Load the logged-in user's information before each request
