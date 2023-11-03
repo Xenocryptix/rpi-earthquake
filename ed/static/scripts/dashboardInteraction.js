@@ -56,12 +56,12 @@ function addLogEntry(entry) {
     }
     const circleIcon = `<img src=${circle} class="entry-circle" alt="circle">`
 
+    const timestamp = new Date().toLocaleTimeString()
+
     container.innerHTML += `
     <div class="entry">
-        <div class="entry-top"><h2>temp</h2></div>
-        <h3><span>${entry.magnitude} </span><span style="color: grey;"> AVG</span></h3>
-        <h3><span> </span><span style="color: grey;"> MAX</span></h3>
-        <h4></h4>
+        <div class="entry-top"><h2>${timestamp}</h2></div>
+        <h3><span><span style="color: grey;"></span>${Math.round(entry.magnitude * 100) / 100}</span></h3>
     </div>
     `;
 }

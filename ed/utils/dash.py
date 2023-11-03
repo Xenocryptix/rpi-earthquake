@@ -1,7 +1,7 @@
 import math
 import json
 
-magnitude_threshold = 0.3
+magnitude_threshold = 0.5
 
 def send_accel():
     from ed import app, socketio
