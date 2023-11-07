@@ -5,29 +5,35 @@ const selectedTimeInterval = document.getElementById('selected-time-interval');
 const selectedGraphData = document.getElementById('selected-graph-data');
 const scopeList = document.getElementById('log-scope-list');
 const selectedScope = document.getElementById('selected-scope');
+const modeList = document.getElementById('mode-list');
+const selectedMode = document.getElementById('selected-mode')
 
-// Add click event listeners to list items
+const arrowImg = '<img src="../static/icons/arrow.svg" alt="arrow" class="arrow-img">'
+
+// Add click event listeners to list items to display the selected value
 intervalList.addEventListener('click', function(e) {
     if (e.target.tagName === 'H3') {
-        selectedTimeInterval.innerHTML = e.target.textContent + '<img src="../static/icons/arrow.svg" alt="arrow" class="arrow-img">';
+        selectedTimeInterval.innerHTML = e.target.textContent + arrowImg;
     }
 });
-
 graphDataList.addEventListener('click', function(e) {
     if (e.target.tagName === 'H3') {
-        selectedGraphData.innerHTML = e.target.textContent + '<img src="../static/icons/arrow.svg" alt="arrow" class="arrow-img">';
+        selectedGraphData.innerHTML = e.target.textContent + arrowImg;
     }
 });
-
 scopeList.addEventListener('click', function(e) {
     if (e.target.tagName === 'H3') {
-        selectedScope.innerHTML = e.target.textContent + '<img src="../static/icons/arrow.svg" alt="arrow" class="arrow-img">';
+        selectedScope.innerHTML = e.target.textContent + arrowImg;
     }
 });
+modeList.addEventListener('click', function (e) {
+    if (e.target.tagName === 'H3') {
+        selectedMode.innerHTML = e.target.textContent + arrowImg;
+    }
+})
 
 
-// Graph data switching
-// Graph data switching
+// Graph data switching listeners
 document.getElementById('opt-magnitude')
     .addEventListener('click', () => changeDisplayedData('magnitude'))
 
@@ -41,33 +47,59 @@ document.getElementById('opt-az')
     .addEventListener('click', () => changeDisplayedData('az'))
 
 
-// Log entries
+// Log switching from local/global listeners
+document.getElementById('scope-global')
+    .addEventListener('click', () => showLocalLogs(false))
+
+document.getElementById('scope-local')
+    .addEventListener('click', () => showLocalLogs(true))
+
+// Mode switching listeners
+document.getElementById('mode-standard')
+    .addEventListener('click', () => switchDetectionMode('standard'))
+document.getElementById('mode-sensitive')
+    .addEventListener('click', () => switchDetectionMode('sensitive'))
+
+let localLogEntries = []; // Initialize as an empty array
+let globalLogEntries = []; // Initialize as an empty array
 function addLogEntry(entry) {
-    let container = document.getElementById('log-entries');
+    if (!'localEntry' in entry)
+        throw new Error("Entry does not contain the local/global identifier")
 
-    // const entry = generateRandomEntry();
-    let circle;
-    if(entry.avg < 1) {
-        circle = "../static/icons/green-circle.svg"
-    } else if (entry.avg >= 1 && entry.avg < 3) {
-        circle = "../static/icons/orange-circle.svg"
+    let timestamp, magnitude, html;
+    // parse the entry depending on if local or global
+    if (entry.localEntry) {
+        timestamp = entry.timestamp;
     } else {
-        circle = "../static/icons/red-circle.svg"
+        timestamp = new Date(entry.properties.time).toLocaleString();
+        magnitude = entry.properties.mag;
     }
-    const circleIcon = `<img src=${circle} class="entry-circle" alt="circle">`
 
-    const timestamp = new Date().toLocaleTimeString()
-
-    container.innerHTML += `
+    // Build the HTML string
+    html = `
     <div class="entry">
         <div class="entry-top"><h2>${timestamp}</h2></div>
-        <h3><span><span style="color: grey;"></span>${Math.round(entry.magnitude * 100) / 100}</span></h3>
+        <h3><span><span style="color: grey;"></span>${Math.round(magnitude * 100) / 100}</span></h3>
     </div>
     `;
+
+    (entry.localEntry) ? localLogEntries.push(html) : globalLogEntries.push(html)
 }
 
+function showLocalLogs(t) {
+    if (t) {
+        document.getElementById('log-entries').innerHTML = localLogEntries.join('');
+    } else {
+        document.getElementById('log-entries').innerHTML = globalLogEntries.join('');
+    }
+}
+
+function switchDetectionMode(mode) {
+    console.log(`selected mode: ${mode}`)
+}
+
+
 function generateRandomEntry() {
-    // Generate a random number between min and max (inclusive)
     function getRandomNumber(min, max) {
         return Math.random() * (max - min) + min;
     }

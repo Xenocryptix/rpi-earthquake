@@ -153,6 +153,7 @@ socket.on('data', function(data) {
 
 //Handle alerts
 socket.on('alert', function (data) {
+  data.localEntry = true;
   addLogEntry(data)
 });
 
