@@ -83,7 +83,14 @@ function addLogEntry(entry) {
     </div>
     `;
 
-    (entry.localEntry) ? localLogEntries.push(html) : globalLogEntries.push(html)
+    if (entry.localEntry) {
+        localLogEntries.push(html)
+        // Automatically switch to displaying local logs if new one comes in
+        document.getElementById('log-entries').innerHTML = localLogEntries.join('');
+        selectedScope.innerHTML = "Local" + arrowImg;
+    } else {
+        globalLogEntries.push(html)
+    }
 }
 
 function showLocalLogs(t) {
