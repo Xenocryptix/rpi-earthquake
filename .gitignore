@@ -15,4 +15,4 @@
 #Ignore certs because Git bad
 *.pem
 
-__pycache__/
+**/__pycache__/
