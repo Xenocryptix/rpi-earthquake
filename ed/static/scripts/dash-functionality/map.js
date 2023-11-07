@@ -12,12 +12,15 @@ L.tileLayer(`https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=${API_KEY
 
 // Fetch earthquake API data
 const url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson'; // Earthquake API
+const maxGlobalLogs = 20; // Limit the max loaded logs to speed up the load time
 fetch(url)
-    .then(function(response) {
+    .then(function (response) {
         return response.json();
     })
-    .then(function(data) {
-        data.features.forEach(function(quake) {
+    .then(function (data) {
+        let globalLogCount = 0; // Counter for processed earthquakes
+
+        data.features.forEach(function (quake) {
             const lat = quake.geometry.coordinates[1];
             const lng = quake.geometry.coordinates[0];
             const magnitude = quake.properties.mag;
@@ -30,26 +33,32 @@ fetch(url)
                 fillOpacity: 0.5
             }).bindPopup('Magnitude: ' + magnitude).addTo(map);
 
-            quake.localEntry = false;
-            addLogEntry(quake);
-            // printEarthquake(quake)
+            if (globalLogCount < maxGlobalLogs) {
+                quake.localEntry = false;
+                logEntryManager.addGlobalLogEntry(quake);
+                globalLogCount++;
+            }
         });
     })
-    .catch(function(error) {
+    .then(() => {
+        // Initially show global logs
+        logEntryManager.showLocalLogs(false);
+    })
+    .catch(function (error) {
         console.error('Error fetching earthquake data:', error);
     });
 
 let userLoc;
 let approximateLoc;
 // Get the user's geolocation using the browser's geolocation API
-navigator.geolocation.getCurrentPosition(function(position) {
+navigator.geolocation.getCurrentPosition(function (position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
     // Set the map's center to the user's geolocation
-    map.setView([latitude, longitude], 12);
+    map.setView([latitude, longitude], 14);
 
-    // Circle to illustrate the location (not precise)
+    // Circle to illustrate the location centre
     userLoc = L.circleMarker([latitude, longitude], {
         radius: 7,
         fillColor: 'blue',
@@ -60,11 +69,11 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
     // Circle to illustrate the approximate location / possible location error
     approximateLoc = L.circle([latitude, longitude], {
-        radius: 2000, // Customize the circle's radius
-        color: 'grey', // Color of the circle's border
-        weight: 2, // Width of the dashed line
+        radius: 1000,
+        color: 'grey',
+        weight: 2,
         dashArray: '5, 10', // Configure the dashed stroke
-        fill: 'grey', // Do not fill the circle
+        fill: 'grey',
     }).addTo(map);
 
 });
@@ -82,7 +91,5 @@ function printEarthquake(quake) {
     console.log('Time: ' + new Date(properties.time).toLocaleString());
     console.log('Coordinates: Lat ' + lat + ', Lng ' + lng);
     console.log('Depth: ' + geometry.coordinates[2] + ' km');
-    console.log('Type: ' + properties.type);
-    console.log('URL: ' + properties.url);
     console.log('------------------------\n');
 }

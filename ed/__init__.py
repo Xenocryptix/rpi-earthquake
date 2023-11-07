@@ -25,15 +25,7 @@ def handle_connect():
     # from ed.utils.dash import generate_random_values
 
     if not hasattr(app, 'dash_thread'):
-        print("Starting background task - read")
         try:
             app.dash_thread = socketio.start_background_task(send_accel)
-            print("Background task - read - started")
         except Exception as e:
             print(f"Exception while starting thread: {e}")
-
-    # if not hasattr(app, 'bg_thread'):
-    #     print("Starting send_accel")
-    #     app.bg_thread = socketio.start_background_task(send_accel)
-    #     print("send_accel started")
-
