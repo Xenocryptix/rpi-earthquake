@@ -9,7 +9,15 @@ function addEventListeners() {
 
     graphDataList.addEventListener('click', function (e) {
         if (e.target.tagName === 'H3') {
-            selectedGraphData.innerHTML = e.target.textContent + arrowImg;
+            let selected = e.target.textContent;
+
+            if(selected.length === 2) {
+                selectedGraphData.innerHTML = `${selected[0]}<sub>${selected[1]}</sub> ${arrowImg}`
+            } else {
+                selectedGraphData.innerHTML = `${selected} ${arrowImg}`
+            }
+            console.log(selected)
+
         }
     });
     scopeList.addEventListener('click', function (e) {
