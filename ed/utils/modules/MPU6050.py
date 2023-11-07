@@ -78,7 +78,7 @@ def read():
 
     MPU_Init()
     print("sensor initialized")
-    from ed.utils.modules.LCD import write_str
+    # from ed.utils.modules.LCD import write_str
 
     while True:
         acc_x = read_raw_data(ACCEL_XOUT)
@@ -98,10 +98,10 @@ def read():
             readings['mag'] = get_vector_acc(readings['ax'], readings['ay'], readings['az'] - 0.98)
 
             #Print to LCD
-            write_str(0, 0, f"ax:{readings['ax']:.2f}")
-            write_str(1, 0, f"ay:{readings['ay']:.2f}")
-            write_str(2, 0, f"az:{readings['az']:.2f}")
-            write_str(3, 0, f"mag:{readings['mag']:.2f}")
+            # write_str(0, 0, f"ax:{readings['ax']:.2f}")
+            # write_str(1, 0, f"ay:{readings['ay']:.2f}")
+            # write_str(2, 0, f"az:{readings['az']:.2f}")
+            # write_str(3, 0, f"mag:{readings['mag']:.2f}")
         
 
 

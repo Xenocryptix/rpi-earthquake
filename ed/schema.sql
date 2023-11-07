@@ -1,8 +1,17 @@
 DROP TABLE IF EXISTS user;
 
 CREATE TABLE user (
-                      id INTEGER PRIMARY KEY AUTOINCREMENT,
-                      deviceId INTEGER UNIQUE NOT NULL,
-                      username TEXT UNIQUE NOT NULL,
-                      password TEXT NOT NULL
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    deviceId INTEGER UNIQUE NOT NULL,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL
 );
+
+CREATE TABLE alerts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    avg FLOAT NOT NULL,
+    max FLOAT NOT NULL,
+    time TIMESTAMP,
+    lat FLOAT NOT NULL,
+    lng FLOAT NOT NULL
+)
