@@ -2,11 +2,15 @@ import RPi.GPIO as GPIO
 import time
 
 # Set the GPIO pin number to which the toggle switch is connected
-toggle_switch_pin = 27
+toggle_switch_pin = 13
+
 
 def switch_init():
+    global toggle_switch_pin
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(toggle_switch_pin, GPIO.IN)
+    toggle_switch_pin = 13
+    GPIO.setup(toggle_switch_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
 
 def read_switch():
     switch_state = GPIO.input(toggle_switch_pin)
@@ -19,6 +23,7 @@ def read_switch():
 
 
 if __name__ == "__main__":
+    switch_init()
     try:
         while True:
             read_switch()
