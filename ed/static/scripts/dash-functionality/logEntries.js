@@ -25,7 +25,6 @@ class LogEntryManager {
         const lng = this.formatGPSCoordinate(geometry.coordinates[0], 'E');
         const depth = parseFloat(geometry.coordinates[2]).toFixed(2);
 
-
         const borderColor = this.getBorderColor(magnitude);
 
         return `
@@ -103,22 +102,6 @@ class LogEntryManager {
         return `${degrees}° ${minutes}' ${seconds}" ${direction}`;
     }
 
-    printLocalEntry(entry) {
-        const avg = entry.avg;
-        const id = entry.id;
-        const lat = entry.lat;
-        const lng = entry.lng;
-        const max = entry.max;
-        const time = entry.time;
-
-        console.log('Object ID:', id);
-        console.log('Average:', avg);
-        console.log('Latitude:', lat);
-        console.log('Longitude:', lng);
-        console.log('Maximum:', max);
-        console.log('Time:', time);
-    }
-
     loadGlobalEntries() {
         const url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson'; // Earthquake API
         const maxGlobalLogs = 20; // Limit the max loaded logs to speed up the load time
@@ -156,6 +139,22 @@ class LogEntryManager {
             .catch(function (error) {
                 console.error('Error fetching earthquake data:', error);
             });
+    }
+
+    printLocalEntry(entry) {
+        const avg = entry.avg;
+        const id = entry.id;
+        const lat = entry.lat;
+        const lng = entry.lng;
+        const max = entry.max;
+        const time = entry.time;
+
+        console.log('Object ID:', id);
+        console.log('Average:', avg);
+        console.log('Latitude:', lat);
+        console.log('Longitude:', lng);
+        console.log('Maximum:', max);
+        console.log('Time:', time);
     }
 }
 

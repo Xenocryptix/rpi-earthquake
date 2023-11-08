@@ -1,23 +1,22 @@
-// Get the lists and the selected items
 const graphDataList = document.getElementById('graph-data-list');
 const selectedGraphData = document.getElementById('selected-graph-data');
 const scopeList = document.getElementById('log-scope-list');
 const selectedScope = document.getElementById('selected-scope');
+
 const arrowImg = '<img src="../static/icons/arrow.svg" alt="arrow" class="arrow-img">'
 
 function addEventListeners() {
-
+    // Change the displayed value in the dropdowns to the selected one
     graphDataList.addEventListener('click', function (e) {
         if (e.target.tagName === 'H3') {
             let selected = e.target.textContent;
 
+            // For Ax, Ay and Az set the second character as a subscript
             if(selected.length === 2) {
                 selectedGraphData.innerHTML = `${selected[0]}<sub>${selected[1]}</sub> ${arrowImg}`
             } else {
                 selectedGraphData.innerHTML = `${selected} ${arrowImg}`
             }
-            console.log(selected)
-
         }
     });
     scopeList.addEventListener('click', function (e) {

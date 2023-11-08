@@ -20,19 +20,19 @@ navigator.geolocation.getCurrentPosition(function (position) {
 
     // Circle to illustrate the location centre
     L.circleMarker([latitude, longitude], {
-        radius: 7,
-        fillColor: 'blue',
+        radius: 9,
+        fillColor: '#0044FFFF',
         color: 'white',
-        weight: 2,
-        fillOpacity: 0.8,
+        weight: 3,
+        fillOpacity: 1,
     }).addTo(map);
 
     // Circle to illustrate the approximate location / possible location error
     L.circle([latitude, longitude], {
-        radius: 1000,
-        color: 'grey',
-        weight: 2,
+        radius: 500,
+        color: '#0044FFFF',
+        fillOpacity: 0.1,
+        weight: 1.5,
         dashArray: '5, 10', // Configure the dashed stroke
-        fill: 'grey',
     }).addTo(map);
 });
