@@ -61,13 +61,12 @@ class LogEntryManager {
     }
 
     createLocalLogHTML(entry) {
+        const time = new Date().toDateString()
         return `
         <div class="entry">
-            <h3>${entry.time}</h3>
+            <h3>${time}</h3>
             <hr>
-            <p><b>MAG:</b> ${entry.max}</p>
-            <p><b>AVG:</b> ${entry.avg}</p>
-            <p style=" font-size: 0.7rem">${entry.lat}${entry.lng}</p>
+            <p><b>MAG:</b> ${parseFloat(entry.magnitude).toFixed(2) }</p>
         </div>
     `;
     }

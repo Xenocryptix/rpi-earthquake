@@ -46,7 +46,7 @@ const graphSettings = {
     },
     magnitude: {
         lineColor: "#FF6542",
-        yDomain: [0, 10],
+        yDomain: [0, 50],
         xAxisTransform: "translate(0," + height + ")",
     },
     default: {
@@ -154,6 +154,7 @@ socket.on('data', function (data) {
 socket.on('alert', function (data) {
     data.localEntry = true;
     logEntryManager.addLocalLogEntry(data)
+    console.log(data);
 });
 
 function changeDisplayedData(value) {

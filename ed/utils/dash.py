@@ -2,7 +2,7 @@ import math
 import json
 import requests
 
-magnitude_threshold = 0.5
+magnitude_threshold = 30 #changable via API
 
 
 def send_accel():
@@ -10,8 +10,10 @@ def send_accel():
     from ed.utils.modules.MPU6050 import read_accel, read
     from ed.utils.modules.buzzer import activate_buzz, buzz_init, deactivate_buzz
     from ed.utils.modules.location import get_coords
+    from ed.utils.modules.switch import switch_init, read_switch
 
     buzz_init()
+    switch_init()
     url = "http://127.0.0.1:5000/alerts"
 
     if not hasattr(app, "read_acc_thread"):
@@ -25,20 +27,14 @@ def send_accel():
 
     while True:
         readings = read_accel()
-
         magnitude = readings["mag"]
 
         # In the case of alerts
-        if magnitude > magnitude_threshold:
+        if magnitude > magnitude_threshold and read_switch():
             print("ALERT")
             socketio.emit("alert", {"magnitude": magnitude}, namespace="/datastream")
             lat, lng = get_coords()
-            alert_data = {
-                "avg": magnitude,
-                "max": magnitude,
-                "lat": lat,
-                "lng": lng
-            }
+            alert_data = {"avg": magnitude, "max": magnitude, "lat": lat, "lng": lng}
             requests.post(url, json=alert_data)
             activate_buzz()
         else:
@@ -52,6 +48,7 @@ def send_accel():
                 "ax": readings["ax"],
                 "ay": readings["ay"],
                 "az": readings["az"],
+                "status": read_switch(),
                 "rate": update_rate_ms,
             },
             namespace="/datastream",
