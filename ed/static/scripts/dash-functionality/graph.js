@@ -8,6 +8,8 @@ const dataBuffer = {
 };
 
 const bufferLength = 30;
+
+// Initialize graph settings
 let displayedDataType = 'magnitude';
 let updateRateMs = 500;
 
@@ -31,17 +33,17 @@ const margin = {top: 10, right: 20, bottom: 50, left: 40},
 const graphSettings = {
     ax: {
         lineColor: "#7189FF",
-        yDomain: [-1, 1],
+        yDomain: [-2, 2],
         xAxisTransform: "translate(0," + height / 2 + ")",
     },
     ay: {
-        lineColor: "#004E64",
-        yDomain: [-1, 1],
+        lineColor: "#009fc9",
+        yDomain: [-2, 2],
         xAxisTransform: "translate(0," + height / 2 + ")",
     },
     az: {
         lineColor: "#68A357",
-        yDomain: [-1, 1],
+        yDomain: [-2, 2],
         xAxisTransform: "translate(0," + height / 2 + ")",
     },
     magnitude: {
@@ -51,7 +53,7 @@ const graphSettings = {
     },
     default: {
         lineColor: "#7189FF",
-        yDomain: [-1, 1],
+        yDomain: [-2, 2],
         xAxisTransform: "translate(0," + height / 2 + ")",
     },
 };
@@ -97,7 +99,7 @@ const path = chartBody.append("path")
     .attr("class", "line")
     .attr("d", valueLine)
     .attr("fill", "none")
-    .attr("stroke", "rgba(0, 68, 255, 0.9)")
+    .attr("stroke", `${graphSettings.ax.lineColor}`)
     .attr("stroke-width", 3);
 
 // Add the X Axis outside the clip path to ensure it's not clipped

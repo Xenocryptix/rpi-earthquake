@@ -14,5 +14,5 @@ changeDisplayedData('magnitude')
 
 
 // TODO: Uncomment when backend feature implemented
-// api.getUptime()
+// api.loadUptime()
 // setInterval(getUptime,60000); // 60000 milliseconds = 1 minute

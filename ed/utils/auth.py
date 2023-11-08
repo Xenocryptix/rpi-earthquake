@@ -18,6 +18,12 @@ from ed.utils.db import get_db
 bp = Blueprint("auth", __name__)
 
 
+# Redirects the root ulr to the login page
+@bp.route("/", methods=["GET"])
+def get_root():
+    return redirect(url_for("auth.login"))
+
+
 @bp.route("/register", methods=["POST"])
 def register():
     # Get the values from the HTML <form> element

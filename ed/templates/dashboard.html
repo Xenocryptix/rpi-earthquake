@@ -30,7 +30,7 @@
             <h4>Uptime</h4>
             <h3 id="uptime">0d 0h 0m</h3>
             <h4>Detection Mode</h4>
-{#            aria-label: Sonarlint Web:S5255#}
+{#            aria-label: Sonarlint rule Web:S5255#}
             <nav class="navbar" id="mode-selector" aria-label="mode-selector">
                 <ul>
                     <li>
@@ -87,7 +87,7 @@
     <div class="container" id="right-div">
         <div class="header">
             <h2>Log</h2>
-            <nav class="navbar">
+            <nav class="navbar" aria-label="log-scope-selector">
                 <ul>
                     <li>
                         <h3 id="selected-scope">Global<img src="../static/icons/arrow.svg" alt="arrow" class="arrow-img">
@@ -105,11 +105,13 @@
     </div>
 </div>
 
+{# APIs #}
 <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 <script src="https://d3js.org/d3.v6.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 
+{# Helper functions #}
 <script src="../static/scripts/dash-functionality/backendAPI.js"></script>
 <script src="../static/scripts/dash-functionality/eventListeners.js"></script>
 <script src="../static/scripts/dash-functionality/logEntries.js"></script>
@@ -117,6 +119,7 @@
 <script src="../static/scripts/dash-functionality/graph.js"></script>
 <script src="../static/scripts/dash-functionality/map.js"></script>
 
+{# Main function #}
 <script src="../static/scripts/dashboard.js"></script>
 </body>
 </html>

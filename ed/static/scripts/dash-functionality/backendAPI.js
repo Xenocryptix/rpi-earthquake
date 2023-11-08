@@ -13,8 +13,8 @@ class backendAPI {
             .then((data) => {
                 if (Array.isArray(data)) {
                     data.forEach((entry) => {
-                        addLogEntry(entry)
-                        printLocalEntry(entry);
+                        logEntryManager.addLocalLogEntry(entry)
+                        logEntryManager.printLocalEntry(entry);
                     });
                 } else {
                     throw new Error('Received data is not an array.');
@@ -25,7 +25,7 @@ class backendAPI {
             });
     }
 
-    getUptime() {
+    loadUptime() {
         const url = ''; // TODO: add URL to fetch the startup time of the Pi/Server
         const uptimeElement = document.getElementById('uptime'); // Get the HTML element
 
