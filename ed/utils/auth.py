@@ -151,6 +151,7 @@ def get_alerts():
     alerts_list = [dict(alert) for alert in alerts]
     return jsonify(alerts_list)
 
+
 @bp.route("/alerts", methods=["POST"])
 def add_alert():
     db = get_db()
@@ -172,3 +173,26 @@ def add_alert():
         return jsonify({"error": str(e)}), 500
     else:
         return jsonify({"message": "Alert added successfully"}), 201
+
+
+@bp.route("/switch_detection_mode", methods=["POST"])
+def switch_detection_mode():
+    from ed.utils.dash import change_mode
+    try:
+        data = request.get_json()
+
+        # Assuming that the JSON data sent contains the sensitivity value
+        sensitivity = data.get("sensitivity")
+
+        change_mode(sensitivity)
+
+        # TODO: Add your logic to switch the detection mode using the sensitivity value
+        # For now, let's just print the received sensitivity value
+        print(f"Received sensitivity value: {sensitivity}")
+
+        # You can add your logic here to switch the detection mode using the sensitivity value
+
+        return jsonify({"message": "Switched detection mode successfully"}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500

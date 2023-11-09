@@ -15,10 +15,10 @@ def switch_init():
 def read_switch():
     switch_state = GPIO.input(toggle_switch_pin)
     if switch_state == GPIO.HIGH:
-        print("Toggle switch is closed")
+        # print("Toggle switch is closed")
         return True
     else:
-        print("Toggle switch is opened")
+        # print("Toggle switch is opened")
         return False
 
 

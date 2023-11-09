@@ -2,8 +2,11 @@ import math
 import json
 import requests
 
-magnitude_threshold = 30 #changable via API
+magnitude_threshold = 20 #changable via API
 
+def change_mode(x):
+    global magnitude_threshold
+    magnitude_threshold = x
 
 def send_accel():
     from ed import app, socketio
